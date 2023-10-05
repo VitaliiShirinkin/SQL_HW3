@@ -6,7 +6,7 @@ GROUP BY g.name, p.artist_name
 ORDER BY 2;
 
 --Количество треков, вошедших в альбомы 2019–2020 годов.
-SELECT album_name n, release_year y, COUNT(track.id)count
+SELECT album_name n, release_year y, COUNT(track.track_id)count
 FROM album
 JOIN track ON track.album_id = album.album_id
 GROUP BY n, y
@@ -19,11 +19,11 @@ JOIN album a ON a.album_id = t.album_id
 GROUP BY n;
 
 -- все исполнители, которые не выпустили альбомы в 2020 году.
-SELECT p.artist_name FROM public.performer p
+SELECT p.artist_name, a1.release_year FROM public.performer p
 JOIN artist_album a2 ON a2.performer_id = p.performer_id
 JOIN album a1 ON a1.album_id = a2.album_id
 WHERE a1.release_year !=2020
-GROUP BY p.artist_name;
+GROUP BY p.artist_name, a1.release_year;
 
 -- Названия сборников, в которых присутствует
 -- конкретный исполнитель (выберите его сами).
