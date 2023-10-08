@@ -6,12 +6,11 @@ GROUP BY g.name, p.artist_name
 ORDER BY 2;
 
 --Количество треков, вошедших в альбомы 2019–2020 годов.
-SELECT album_name n, release_year y, COUNT(track.track_id)count
+SELECT release_year, COUNT(album_name) AS number_of_albums
 FROM album
-JOIN track ON track.album_id = album.album_id
-GROUP BY n, y
-HAVING release_year BETWEEN 1994 AND 2002
-ORDER BY 2;
+WHERE release_year BETWEEN 1994 AND 2002
+GROUP BY release_year
+ORDER BY release_year;
 
 --Средняя продолжительность треков по каждому альбому.
 SELECT AVG(t.duration), a.album_name n FROM track t
